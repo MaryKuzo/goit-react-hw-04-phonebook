@@ -1,23 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import { initContacts, useLocalStorage } from './Hooks/Hooks';
+import { useLocalStorage } from '../Hooks/Hooks';
 
 function App() {
 
   const { contacts, setContacts } = useLocalStorage()
   const [filter, setFilter] = useState('')
-
-  useEffect(() => {
-    if (contacts.length === 0) {
-      setContacts(initContacts);
-    }
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts, setContacts]);
 
   const addContact = ({ name, number }) => {
     const normalizedName = name.toLowerCase();
