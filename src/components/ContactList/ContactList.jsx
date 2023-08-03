@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {ContactUl, ContactLi, ContactText, Button} from './ContactList.styled'
 
-const ContactList = ({ contacts,onClickDelete  }) => {
+const ContactList = ({ contacts, onClickDelete  }) => {
   return (
     <ContactUl>
     {contacts.map(({ id, name, number }) => (

@@ -5,8 +5,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import useLocalStorage from './Hooks/Hooks';
-
+import { initContacts, useLocalStorage } from './Hooks/Hooks';
 
 function App() {
 
@@ -14,9 +13,11 @@ function App() {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-
-    localStorage.setItem('contacts', JSON.stringify(contacts))
-  }, [contacts]);
+    if (contacts.length === 0) {
+      setContacts(initContacts);
+    }
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts, setContacts]);
 
   const addContact = ({ name, number }) => {
     const normalizedName = name.toLowerCase();
@@ -48,14 +49,13 @@ function App() {
 
   };
 
-const visibleContacts = getVisibleContacts();
   const contactsName = contacts.map(contact => contact.name)
     return (
       <div>
         <ContactForm onSubmit={addContact} />
         <Filter value={filter} onChange={changeFilter} contactsName={contactsName } />
         <ContactList
-          contacts={visibleContacts}
+          contacts={getVisibleContacts()}
           onClickDelete={deleteContact}
         />
         <ToastContainer
