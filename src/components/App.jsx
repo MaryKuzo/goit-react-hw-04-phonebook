@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import { useLocalStorage } from '../Hooks/Hooks';
+import { useLocalStorage } from '../hooks/hooks';
 
 function App() {
 
